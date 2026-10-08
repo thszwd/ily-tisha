@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7e9ed">
+  <meta name="description" content="Письмо о любви">
+  <title>Для тебя — письмо о любви</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f8eaee;
+      --paper-deep: #f3dbe2;
+      --ink: #351c2a;
+      --muted: #7e5c6a;
+      --rose: #c95c79;
+      --rose-dark: #a63f5e;
+      --peach: #f5c8b8;
+      --gold: #e7b66e;
+      --white: rgba(255, 250, 248, .72);
+      --shadow: 0 24px 70px rgba(89, 38, 59, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 5%, rgba(255, 255, 255, .76), transparent 24rem),
+        radial-gradient(circle at 88% 38%, rgba(245, 200, 184, .45), transparent 28rem),
+        var(--paper);
+      font-family: Manrope, system-ui, sans-serif;
+      line-height: 1.7;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .22;
+      pointer-events: none;
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      place-items: center;
+      overflow: hidden;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      width: min(42vw, 34rem);
+      aspect-ratio: 1;
+      border: 1px solid rgba(201, 92, 121, .18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero::before { transform: translate(-38%, -22%); }
+    .hero::after { transform: translate(38%, 28%) scale(.7); }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 44rem;
+      animation: appear .9s ease both;
+    }
+
+    .eyebrow {
+      margin: 0 0 1.3rem;
+      color: var(--rose-dark);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 500;
+      line-height: .96;
+    }
+
+    h1 {
+      max-width: 10ch;
+      margin-inline: auto;
+      font-size: clamp(4.4rem, 15vw, 9.5rem);
+      letter-spacing: -.055em;
+    }
+
+    .hero-subtitle {
+      max-width: 26rem;
+      margin: 2rem auto 2.4rem;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 3.5rem;
+      align-items: center;
+      justify-content: center;
+      padding: .85rem 1.65rem;
+      border: 1px solid var(--rose);
+      border-radius: 999px;
+      color: #fffaf8;
+      background: var(--rose);
+      box-shadow: 0 12px 24px rgba(166, 63, 94, .2);
+      font: inherit;
+      font-size: .88rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+
+    .button:hover {
+      background: var(--rose-dark);
+      box-shadow: 0 15px 28px rgba(166, 63, 94, .28);
+      transform: translateY(-2px);
+    }
+
+    .button--quiet {
+      color: var(--rose-dark);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .button--quiet:hover { color: #fffaf8; }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 50%;
+      color: var(--muted);
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      transform: translateX(-50%);
+    }
+
+    .scroll-hint::after {
+      display: block;
+      width: 1px;
+      height: 2.2rem;
+      margin: .65rem auto 0;
+      background: var(--rose);
+      content: "";
+      opacity: .6;
+    }
+
+    .letter {
+      position: relative;
+      max-width: 54rem;
+      margin: 0 auto;
+      padding: 7rem 1.5rem 8rem;
+    }
+
+    .letter::before {
+      position: absolute;
+      top: 4rem;
+      left: 50%;
+      width: 1px;
+      height: 2.2rem;
+      background: var(--rose);
+      content: "";
+      opacity: .55;
+    }
+
+    .letter-header { margin-bottom: 3rem; }
+    .letter-header h2 { max-width: 12ch; font-size: clamp(3rem, 8vw, 5.5rem); }
+
+    .letter-paper {
+      position: relative;
+      padding: clamp(2rem, 6vw, 4.5rem);
+      border: 1px solid rgba(126, 92, 106, .16);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .letter-paper::before {
+      position: absolute;
+      inset: .65rem;
+      border: 1px solid rgba(201, 92, 121, .12);
+      pointer-events: none;
+      content: "";
+    }
+
+    .letter-paper p {
+      position: relative;
+      max-width: 38rem;
+      margin: 0 0 1.55rem;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.3rem, 2.6vw, 1.65rem);
+      line-height: 1.5;
+    }
+
+    .letter-paper p:last-child { margin-bottom: 0; }
+    .placeholder { color: var(--muted); font-style: italic; }
+
+    .letter-footer {
+      padding-top: 3rem;
+      text-align: center;
+    }
+
+    .letter-footer p {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .proposal {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      place-items: center;
+      overflow: hidden;
+      padding: 5rem 1.5rem;
+      background: var(--ink);
+      color: #fff5f2;
+      text-align: center;
+    }
+
+    .proposal::before {
+      position: absolute;
+      width: min(90vw, 42rem);
+      aspect-ratio: 1;
+      border: 1px solid rgba(245, 200, 184, .2);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .proposal-content { position: relative; z-index: 1; }
+    .proposal .eyebrow { color: var(--peach); }
+    .proposal h2 { max-width: 11ch; margin-inline: auto; font-size: clamp(4rem, 13vw, 8rem); }
+    .proposal-copy { margin: 2rem auto; color: #e8cfd5; }
+    .proposal-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+    .proposal .button { color: var(--ink); background: var(--peach); border-color: var(--peach); }
+    .proposal .button:hover { background: #ffe0d5; }
+    .proposal .button--quiet { color: #f3cbd3; background: transparent; border-color: rgba(245, 200, 184, .5); }
+    .proposal .button--quiet:hover { color: var(--ink); }
+
+    .answer {
+      min-height: 1.7em;
+      margin: 1.5rem 0 0;
+      color: var(--peach);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.6rem;
+    }
+
+    .heart { display: inline-block; color: var(--rose); animation: heartbeat 1.3s ease-in-out infinite; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(1.5rem); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      12% { transform: scale(1.15); }
+      24% { transform: scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      .hero { min-height: 92svh; }
+      .letter { padding-top: 6rem; }
+      .letter-paper { padding: 2rem 1.35rem; }
+      .letter-paper::before { inset: .4rem; }
+      .scroll-hint { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">Для самого важного человека</p>
+        <h1 id="hero-title">Это письмо — тебе <span class="heart" aria-hidden="true">♥</span></h1>
+        <p class="hero-subtitle">Несколько слов, которые давно живут у меня внутри.</p>
+        <a class="button" href="#letter">Открыть письмо</a>
+      </div>
+      <span class="scroll-hint" aria-hidden="true">читай дальше</span>
+    </section>
+
+    <section class="letter" id="letter" aria-labelledby="letter-title">
+      <header class="letter-header">
+        <p class="eyebrow">Моё признание</p>
+        <h2 id="letter-title">С того дня, как появилась ты</h2>
+      </header>
+
+      <article class="letter-paper">
+        <p>Ты — моя мечта, ставшая реальностью. С тобой всё настоящее: можно спорить, молчать, смеяться, но без тебя пусто. Я не ищу идеала — я люблю тебя целиком: твою мягкость, силу, искренность, голос, смех, взгляд и даже тишину. Рядом с тобой спокойно, тепло и не страшно быть уязвимым; ты стала моим домом, моим человеком, моим выбором и смыслом. Я хочу быть рядом не «просто на время», а долго — просыпаться с мыслью о тебе, засыпать, держа тебя за руку, и строить будущее вместе. Ты — моё сердце. И поэтому, любя тебя тихо, спокойно и по-настоящему, я хочу спросить</p>
+      </article>
+
+      <footer class="letter-footer">
+        <p>Это ещё не конец письма.</p>
+        <a class="button" href="#proposal">Перейти к главному вопросу</a>
+      </footer>
+    </section>
+
+    <section class="proposal" id="proposal" aria-labelledby="proposal-title">
+      <div class="proposal-content">
+        <p class="eyebrow">И вот о чём я хотел спросить</p>
+        <h2 id="proposal-title">Ты выйдешь за меня?</h2>
+        <p class="proposal-copy">Я хочу прожить с тобой все следующие главы.</p>
+        <div class="proposal-actions">
+          <button class="button" type="button" id="yes-button">Да <span aria-hidden="true">♥</span></button>
+          <button class="button button--quiet" type="button" id="yes-again-button">Конечно, да</button>
+        </div>
+        <p class="answer" id="answer" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const answer = document.querySelector('#answer');
+    const yesButtons = document.querySelectorAll('#yes-button, #yes-again-button');
+
+    yesButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        answer.textContent = 'Тогда это самое счастливое «да» в моей жизни.';
+      });
+    });
+  </script>
+</body>
+</html>
